@@ -15,10 +15,9 @@ public class ReqresTests extends BaseTest {
                 .when()
                 .get("/api/users/2")
         .then()
-                .statusCode(200)
                 .log().body()
-                .body("data.first_name",
-                        is("Janet"));
+                .statusCode(200)
+                .body("data.first_name", is("Janet"));
     }
 
     @Test
@@ -30,8 +29,8 @@ public class ReqresTests extends BaseTest {
         .when()
                 .post("/api/users")
         .then()
-                .statusCode(201)
                 .log().body()
+                .statusCode(201)
                 .body("name", is("morpheus"))
                 .and()
                 .body("id", is(notNullValue()));
@@ -43,8 +42,8 @@ public class ReqresTests extends BaseTest {
                 .when()
                 .get("/api/unknown/23")
         .then()
-                .statusCode(404)
                 .log().body()
+                .statusCode(404)
                 .body(is("{}"));
     }
 
@@ -54,8 +53,8 @@ public class ReqresTests extends BaseTest {
                 .when()
                 .get("api/users?delay=3")
         .then()
-                .statusCode(200)
                 .log().body()
+                .statusCode(200)
                 .body("data", hasSize(6))
                 .and()
                 .body("data.first_name[0]", equalTo("George"));
@@ -67,7 +66,7 @@ public class ReqresTests extends BaseTest {
                 .when()
                 .delete("/api/users/2")
         .then()
-                .statusCode(204)
-                .log().body();
+                .log().body()
+                .statusCode(204);
     }
 }
